@@ -1,0 +1,51 @@
+{% extends 'base.html' %} {% block title %} Homepage-Transaltor {% endblock
+title %} {% block body %}
+<div class="container p-5">
+  <form action="/" method="POST">
+    <div class="form-floating"></div>
+      <h3 class="mt-2">From</h3>
+      <div class="form-floating">
+        <select class="form-select mt-1" id="floatingSelect" aria-label="Floating label select example" name="from_language">
+          <option selected>{{data[0]}}</option>
+          {% for lang in language %}
+              <option value='{{lang}}'>{{lang}}</option>
+          {% endfor %}
+        </select>
+        <label for="floatingSelect">Select Language</label>
+    </div>
+      <textarea
+        class="form-control mt-2"
+        placeholder="Enter Text To Be Translated"
+        id="floatingTextarea2"
+        style="height: 100px"
+        name="from_textarea"
+        required autofocus
+      >{{ data[1] }}</textarea>
+      <br>
+      <div class="form-floating"></div>
+      <h3 class="mt-2">To</h3>
+      <div class="form-floating">
+        <select class="form-select mt-1" id="floatingSelect" aria-label="Floating label select example" name="to_language">
+          <option selected>{{data[2]}}</option>
+          {% for lang in language %}
+              <option value='{{lang}}'>{{lang}}</option>
+          {% endfor %}
+        </select>
+        <label for="floatingSelect">Select Language</label>
+    </div>
+      <textarea
+        class="form-control mt-2"
+        placeholder="Translated Text will Appear Here"
+        id="floatingTextarea2"
+        style="height: 100px"
+        name="to_textarea"
+      >{{data[3]}}</textarea>
+      <br>
+      <h4>Pronunciation : </h4>
+      <p>{{ data[4] }}</p>
+      <button class="btn btn-secondary mt-2" type="Reset">Reset</button>
+      <button class="btn btn-primary mt-2" type="submit">Translate</button>
+    </div>
+  </form>
+</div>
+{% endblock body %}
