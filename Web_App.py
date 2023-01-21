@@ -24,11 +24,11 @@ def homepage():
             dest_txt=transalate(src,src_txt,dest).text
             pronun=transalate(src,src_txt,dest).pronunciation
             data=[src,src_txt,dest,dest_txt,pronun]
-            return render_template('homepage.html',language=language,data=data)
+            return render_template('index.html',language=language,data=data)
         except :
             return redirect("/")
     else:
         data=["Detecting Language..","","hindi","",""]
-        return render_template('homepage.html',language=language,data=data)
+        return render_template('index.html',language=language,data=data)
 
-app.run(debug=False)
+app.run(debug=True,host='0.0.0.0')

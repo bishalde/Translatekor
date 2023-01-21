@@ -1,0 +1,91 @@
+*{
+    background-color: white;
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Roboto Slab', serif;
+
+}
+html{
+    font-size: 30px;
+}
+header{
+    background-origin: padding-box;
+    background-color: blue;
+    font-family: 'Oswald', sans-serif;
+}
+
+.mainlogo{
+    background-color: inherit;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 10px 20px;
+}
+
+main{
+    margin: 20px 10px;
+    text-align: center;
+}
+
+main div{
+
+    font-size: 10px;
+}
+main div h3{
+    font-size: 40px;
+}
+
+main div select{
+    margin: 0px 10px 10px -10px;
+    font-size: .7rem;
+}
+
+main div textarea{
+    min-height: 20vh;
+    min-width: 80vw;
+    max-width: 80vw;
+    font-size: .7rem;
+    padding: 2px 5px;
+}
+
+.btn{
+    margin:10px 10px;
+    display: inline-block;
+    height: 5vh;
+    width: 25vw;
+    background-color: blue;
+    border: 0px;
+    color: white;
+    font-size: .6rem;
+    cursor: pointer;
+}
+.reset{
+    background-color: red;
+}
+.btn:hover{
+    background-color: cadetblue;
+    color: yellow;
+}
+
+main div h4{
+    font-family: 'Oswald', sans-serif;
+    text-align: justify;
+    font-size: .8rem;
+    color:blueviolet;
+    line-height: .95;
+    margin: 3% 10%;
+}
+
+footer{
+    display: block;
+    background-color: blueviolet;
+    height: 20px;
+
+}
+footer p{
+    color: yellow;
+    margin: 0px 0px 0px 10px;
+    background-color: inherit;
+    text-align: right;
+    font-size: .5rem;
+}

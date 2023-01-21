@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transalator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+  <header>
+    <a class="mainlogo" href="/">Translator</a>
+  </header>
+  <main>
+    <div class="content">
+        <form action="/" method="POST">
+              <h3 >From</h3>
+              <div >
+                <select id="floatingSelect" aria-label="Floating label select example" name="from_language">
+                  <option selected>{{data[0].title()}}</option>
+                  {% for lang in language %}
+                      <option value='{{lang}}'>{{lang.title()}}</option>
+                  {% endfor %}
+                </select>
+
+            </div>
+              <textarea
+                placeholder="Enter Text To Be Translated"
+                id="floatingTextarea2"
+                style="height: 100px"
+                name="from_textarea"
+                required autofocus
+              >{{ data[1] }}</textarea>
+              <br>
+              <div ></div>
+              <h3 >To</h3>
+              <div >
+                <select id="floatingSelect" aria-label="Floating label select example" name="to_language">
+                  <option selected>{{data[2].title()}}</option>
+                  {% for lang in language %}
+                      <option value='{{lang}}'>{{lang.title()}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+              <textarea
+                placeholder="Translated Text will Appear Here"
+                id="floatingTextarea2"
+                style="height: 100px"
+                name="to_textarea"
+              >{{data[3]}}</textarea>
+              <br>
+              <h3>Pronunciation : </h3>
+              <h4>{{data[4].title()}}</h4>
+              <input class="btn reset" type="reset">
+              <button class="btn" type="submit">Translate</button>
+            </div>
+          </form>
+    </div>
+  </main>
+  <footer>
+    <p> -> bishalde@2023</p>
+  </footer>
+  </body>
+</html>
