@@ -28,7 +28,7 @@ def homepage():
         except :
             return redirect("/")
     else:
-        data=["Detecting Language..","","hindi","",""]
+        data=["Detecting Language..","","Target Language","",""]
         return render_template('index.html',language=language,data=data)
 
 app.run(debug=True,host='0.0.0.0')

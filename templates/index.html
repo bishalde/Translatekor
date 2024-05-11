@@ -2,9 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Transalator</title>
+    <title>Layout Example</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,60 +18,622 @@
       href="https://fonts.googleapis.com/css2?family=Sofia+Sans:wght@300&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/static/style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+      /* Resetting default styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+     
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+      /* Body styles */
+      body {
+        background-color: var(--background-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition: background-color var(--transition-duration),
+          color var(--transition-duration);
+      }
+
+      /* Header styles */
+      header {
+        background-color: var(--header-bg);
+        padding: 0.5rem;
+        transition: background-color var(--transition-duration);
+      }
+
+      :root {
+        --background-color: #e4ccff;
+        --header-bg: #d1b5f0;
+        --text-color: #000;
+        --company-name: rgb(19, 18, 18);
+        --transition-duration: 0.3s;
+        --text-color2:white;
+        --main-div:white;
+        --div-top:rgb(255, 255, 255);
+        --border-right:#151414;
+        --console:#f5f5f5;
+        --footer:#7656a0;
+      }
+      .dark-mode {
+        --background-color: #111;
+        --header-bg: #171717b7;
+        --text-color: #fff;
+        --company-name: white;
+        --text-color2:black;
+        --main-div:rgb(13, 13, 13);
+        --div-top:rgb(19, 19, 19);
+        --border-right:#888888;
+        --console:#131313;
+        --footer:#1c0a33;
+
+      }
+
+      .dark-mode-toggle {
+        position: absolute;
+        top: 0.5rem;
+        right: 1rem; /* Adjust the left position as needed */
+        cursor: pointer;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #sunIcon,
+      #moonIcon {
+        margin-right: 0.5rem;
+        animation: rotate infinite 3s;
+      }
+      .dropdown-mode {
+        display: none;
+        position: absolute;
+        background-color: var(--text-color2);
+        color:var(--text-color);
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 6px 12px; /* Adjusted padding for a more compact appearance */
+        font-size: 12px;
+        top: 100%;
+        right: 0;
+        white-space: nowrap; /* Ensures text stays in a single line */
+        width: max-content; /* Set width to fit content */
+        transition: ease-in-out 0.3s;
+      }
+
+      .dark-mode-toggle:hover .dropdown-mode {
+        display: inline-block;
+      }
+      .company-name {
+        color: var(--company-name);
+        font-size: 2rem;
+        padding: 0.7rem;
+        font-family: "Noto Sans", sans-serif;
+        position: relative; /* Added */
+        transition: background-color var(--transition-duration);
+      }
+
+      .tagline {
+        position: absolute;
+        bottom: 0.1rem; /* Adjust as needed */
+        left: 2.7rem; /* Adjust as needed */
+        font-size: 9px;
+        text-align: center;
+      }
+
+      /* Main styles */
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+      }
+
+      /* Root container styles */
+      .root-container {
+        height: 80vh; /* 80% of viewport height */
+        width: 100%; /* Full width */
+        /* background-color: red; */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+      }
+
+      /* Parent styles */
+      .parent {
+        height: 80%; /* 90% of .root-container height */
+        width: 80%; /* 90% width of .root-container */
+        display: flex;
+      }
+
+      /* Side-by-side layout */
+      .side-by-side {
+        flex: 1; /* Equal width for both divs */
+        display: flex;
+        box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.7), 0px 2px 10px 2px rgba(255, 255, 255, 0);
+         border-radius: 1rem;
+      }
+
+      /* Left div styles */
+      .left-div {
+        flex: 1;
+        padding: 20px;
+        background-color:var(--main-div);
+        border-right: 1px solid var(--border-right);
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        position: relative; /* Added */
+        display: flex; /* Added */
+        flex-direction: column; /* Added */
+        justify-content: space-between; /* Added */
+        transition: background-color var(--transition-duration);
+
+      }
+
+      /* Right div styles */
+      .right-div {
+        flex: 1;
+        padding: 20px;
+        background-color: var(--main-div);
+        border-top-right-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+        position: relative; /* Added */
+        display: flex; /* Added */
+        flex-direction: column; /* Added */
+        justify-content: space-between; /* Added */
+        transition: background-color var(--transition-duration);
+        color: var(--text-color);
+
+      }
+      .left-from-top {
+        height: 11%;
+        background-color: var(--div-top);
+        border-bottom: 1px rgba(39, 39, 39, 0.699) solid;
+        border-top-left-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* Use space-between for equal spacing */
+        padding: 0 10px;
+        transition: background-color var(--transition-duration);
+
+      }
+
+      .left-content-lang {
+  display: flex;
+  align-items: center;
+  background-color: var(--div-top);
+  border-radius: 0 8px 8px 0;
+  /* border: 1px solid #858585; */
+  padding: 5px; /* Adjust as needed */
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  transition: background-color var(--transition-duration);
+
+}
+
+.expand-more {
+  margin-left: auto; /* Pushes the icon to the right */
+}
+
+.right-content-lang{
+    background-color: var(--div-top);
+        border-radius: 0.5rem;
+        /* border: 1px solid #ccc; */
+        padding: 5px; /* Adjust as needed */
+        transition: background-color var(--transition-duration);
+        color: var(--text-color);
+
+
+}
+#floatingSelect{
+  padding: 5px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+      .right-content-swap {
+        display: flex; /* Added */
+        align-items: center; /* Added */
+      }
+.right-content-swap:hover{
+  cursor: pointer;
+}
+      .right-content-swap img {
+        width: 6px;
+        height: 6px;
+        margin-right: 5px; /* Adjust as needed for spacing between icon and text */
+      }
+
+      /* Right from top div */
+      .right-from-top {
+        height: 11%;
+        background-color: var(--div-top); /* Just for visibility */
+        border-bottom: 1px rgba(39, 39, 39, 0.699) solid;
+        border-top-right-radius: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: left; /* Use space-between for equal spacing */
+        padding: 0 10px;
+        transition: background-color var(--transition-duration);
+
+      }
+
+      /* Left type user div */
+      .left-type-user {
+        height: 79%; /* Adjust height as needed */
+        background-color: var(--text-color2);
+        border-bottom: 1px solid #151414;
+        padding: 5px;
+        color: var(--text-color);
+        font-size: 1rem;
+        transition: background-color var(--transition-duration);
+
+      }
+
+      /* Left bottom consoles div */
+      .left-bottom-consoles {
+        height: 10%; /* Adjust height as needed */
+        background-color: var(--console);
+        padding: 3px;
+        overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        transition: background-color var(--transition-duration);
+
+      }
+      .char-count {
+  color: var(--border-right); /* Example color */
+  font-size: 14px;
+  transition: background-color var(--transition-duration);
+
+}
+
+.speech {
+  font-weight:100;
+  color: #444444;
+  border-radius: 50%;
+  
+}
+.speech:hover{
+  cursor: pointer;
+  color: blue;
+}
+.translate-button {
+  border:none;
+  background-color: #007bff; /* Example button color */
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.translate-button:hover {
+  background-color: #0056b3; /* Example hover color */
+}
+
+      /* Right result div */
+      .right-result {
+        height: 79%; /* Adjust height as needed */
+        background-color: var(--main-div);
+        border-bottom: 1px solid #151414;
+        padding: 10px;
+        transition: background-color var(--transition-duration);
+
+      }
+
+      .right-bottom-consoles {
+  height: 10%;
+  background-color: var(--console);
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* To push elements to the sides */
+  overflow: hidden; /* Prevent content from overflowing */
+  transition: background-color var(--transition-duration);
+
+}
+
+.pronun-flow {
+  max-width: 70%; /* Adjust as needed */
+  overflow-y: auto; /* Add vertical scroll bar when content overflows */
+  padding: 8px; /* Add padding to separate content from edges */
+  border-radius: 4px; /* Optional: Add border radius for visual appeal */
+  color: var(--text-color);
+  transition: background-color var(--transition-duration);
+
+}
+
+
+      .copy-results{
+        padding-right: 10px;
+      }
+      .copy-results:hover{
+        cursor: pointer;
+      }
+      /* Footer styles */
+      footer {
+        background-color: var(--footer);
+        color: #fff;
+        text-align: center;
+        padding: 0.6rem;
+        transition: background-color var(--transition-duration);
+
+      }
+
+      form{
+        /* height: 100%;
+        width: 100%; */
+        flex: 1; /* Equal width for both divs */
+        display: flex;
+        box-shadow: 0px 2px 2px 2px rgba(63, 63, 63, 0.7);
+        border-radius: 1rem;
+        transition: background-color var(--transition-duration);
+
+      }
+      textarea {
+  all: unset;
+  width: 100%;
+  height: 100%;
+  font-size: 1rem;
+  border: none;
+  resize: none;
+  font-family: "Noto Sans", sans-serif;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+textarea::-webkit-scrollbar {
+  display: none; 
+}
+#toLanguageSelect{
+  color:var(--text-color);
+  font-size: 1.1rem;
+  transition: background-color var(--transition-duration);
+}
+
+#fromLanguageSelect{
+  color:var(--text-color);
+  font-size: 1.1rem;
+  transition: background-color var(--transition-duration);
+
+}
+#copiedToast {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+.opt{
+  background-color: var(--div-top);
+  border: none;
+  transition: background-color var(--transition-duration);
+color: var(--text-color);
+}
+    </style>
   </head>
   <body>
-  <header>
-    <a class="mainlogo" href="/">Translator</a>
-  </header>
-  <main>
-    <div class="content">
-        <form action="/" method="POST">
-              <h3 >From</h3>
-              <div >
-                <select id="floatingSelect" aria-label="Floating label select example" name="from_language">
-                  <option selected>{{data[0].title()}}</option>
-                  {% for lang in language %}
-                      <option value='{{lang}}'>{{lang.title()}}</option>
-                  {% endfor %}
-                </select>
+    <header>
+      <div class="company-name">
+        TRANSLATEKOR<span class="tagline">world communicates</span>
+      </div>
+      <div class="dark-mode-toggle" id="darkModeToggle">
+        <span class="dropdown-mode">Change mode</span>
+        <img src="../static/assets/sun.png" alt="Light Mode" id="sunIcon" />
+        <img
+          src="../static/assets/moon.png"
+          alt="Dark Mode"
+          id="moonIcon"
+          style="display: none"
+        />
+      </div>
+    </header>
 
-            </div>
-              <textarea
+    <main>
+      <div class="root-container">
+        <div class="parent">
+          <div class="side-by-side">
+            <form action="/" method="POST">
+            <div class="left-div">
+              <div class="left-from-top">
+                <div class="left-content-lang">
+                  <select id="fromLanguageSelect" class="opt" aria-label="From Language" name="from_language">
+                    <option selected class="opt">{{data[0].title()}}</option>
+                    {% for lang in language %}
+                    <option value='{{lang}}'>{{lang.title()}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="right-content-swap" id="swapButton">
+                  <span class="material-symbols-outlined">swap_horiz</span>
+                </div>
+              </div>
+              <div class="left-type-user"  id="fromTextarea">
+                <textarea
                 placeholder="Enter Text To Be Translated"
-                id="floatingTextarea2"
-                style="height: 100px"
+                id="floatingTextarea1"
                 name="from_textarea"
                 required autofocus
               >{{ data[1] }}</textarea>
-              <br>
-              <div ></div>
-              <h3 >To</h3>
-              <div >
-                <select id="floatingSelect" aria-label="Floating label select example" name="to_language">
-                  <option selected>{{data[2].title()}}</option>
-                  {% for lang in language %}
-                      <option value='{{lang}}'>{{lang.title()}}</option>
-                  {% endfor %}
-                </select>
+              </div>
+              <div class="left-bottom-consoles">
+                <div id="charCount" class="char-count">{{ data[1].length }} characters</div>
+                <div class="speech">
+                  <span class="material-symbols-outlined speak_now_fade">mic</span>
+                </div>
+                <!-- <div class="translate-button" id="translateButton">Translate</div> -->
+                <button class="translate-button" type="submit">Translate</button>
+              </div>
             </div>
-              <textarea
+            <div class="right-div">
+              <div class="right-from-top">
+                <div class="right-content-lang">
+                  <select id="toLanguageSelect" class="opt" aria-label="To Language" name="to_language">
+                    <option selected >{{data[2].title()}}</option>
+                    {% for lang in language %}
+                    <option value='{{lang}}'>{{lang.title()}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="right-result" id="translatedText"> <textarea
                 placeholder="Translated Text will Appear Here"
                 id="floatingTextarea2"
-                style="height: 100px"
                 name="to_textarea"
               >{{data[3]}}</textarea>
-              <br>
-              <h3>Pronunciation : </h3>
-              <h4>{{data[4].title()}}</h4>
-              <input class="btn reset" type="reset">
-              <button class="btn" type="submit">Translate</button>
+              <div id="copiedToast">Copied to clipboard</div>
+            </div>
+              <div class="right-bottom-consoles">
+                <div class="pronun-flow">
+                <h3>Pronunciation :</h3>
+                {{data[4].title()}}
+</div>
+                <div class="copy-results" id="copy-results">
+                  <span class="material-symbols-outlined">content_copy</span>
+                </div>
+              </div>
             </div>
           </form>
-    </div>
-  </main>
-  <footer>
-    <p> -> bishalde@2023</p>
+          </div>
+          
+        </div>
+      </div>
+    </main>
+    <footer id="footer">
+      <p>&copy; <span id="currentYear"></span>&nbsp;Bishalde</p>
   </footer>
+  <script>
+
+    // Get the current year
+const currentYear = new Date().getFullYear();
+// Set the current year in the footer
+document.getElementById('currentYear').textContent = currentYear;
+
+  </script>
+
+    <script>
+      const darkModeToggle = document.getElementById("darkModeToggle");
+      const body = document.body;
+      const sunIcon = document.getElementById("sunIcon");
+      const moonIcon = document.getElementById("moonIcon");
+
+      // Function to toggle dark mode
+      const toggleDarkMode = () => {
+        body.classList.toggle("dark-mode");
+        sunIcon.style.display = body.classList.contains("dark-mode")
+          ? "none"
+          : "block";
+        moonIcon.style.display = body.classList.contains("dark-mode")
+          ? "block"
+          : "none";
+      };
+
+      // Toggle dark mode on click
+      darkModeToggle.addEventListener("click", toggleDarkMode);
+    </script>
+
+<script>
+  // Get the textarea element and character count display element
+  const textarea = document.getElementById('floatingTextarea1');
+  const charCount = document.getElementById('charCount');
+
+  // Update the character count display initially
+  charCount.textContent = `${textarea.value.length} characters`;
+
+  // Add input event listener to the textarea
+  textarea.addEventListener('input', function() {
+    // Update the character count display
+    charCount.textContent = `${textarea.value.length} characters`;
+  });
+</script>
+
+<script>
+  // Get the swap button element
+const swapButton = document.getElementById('swapButton');
+
+// Get the select elements
+const fromLanguageSelect = document.getElementById('fromLanguageSelect');
+const toLanguageSelect = document.getElementById('toLanguageSelect');
+
+// Add click event listener to the swap button
+swapButton.addEventListener('click', () => {
+  // Get the selected options from both select elements
+  const fromSelectedOption = fromLanguageSelect.options[fromLanguageSelect.selectedIndex];
+  const toSelectedOption = toLanguageSelect.options[toLanguageSelect.selectedIndex];
+
+  // Swap the text content and values of the selected options
+  const tempText = fromSelectedOption.textContent;
+  const tempValue = fromSelectedOption.value;
+
+  fromSelectedOption.textContent = toSelectedOption.textContent;
+  fromSelectedOption.value = toSelectedOption.value;
+
+  toSelectedOption.textContent = tempText;
+  toSelectedOption.value = tempValue;
+});
+
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  // Your code here
+  
+  document.getElementById('copy-results').addEventListener('click', function() {
+    console.log(document.getElementById('copyButton')); // Check if the element exists
+
+  var textarea = document.getElementById('floatingTextarea2');
+  textarea.select();
+  document.execCommand('copy');
+
+  var copiedToast = document.getElementById('copiedToast');
+  copiedToast.style.display = 'block';
+
+  setTimeout(function() {
+    copiedToast.style.display = 'none';
+  }, 2000); // 2 seconds
+});
+});
+
+
+</script>
+<script>
+  // Check browser support
+if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+  // Initialize SpeechRecognition
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US'; // Set language
+
+  // Handle recognition result
+  recognition.onresult = function(event) {
+    const result = event.results[event.results.length - 1][0].transcript;
+    document.getElementById('floatingTextarea1').value = result;
+  };
+
+  // Handle click on .speech div
+  document.querySelector('.speech').addEventListener('click', function() {
+    recognition.start(); // Start speech recognition
+  });
+} else {
+  console.log('Speech recognition not supported');
+}
+
+</script>
   </body>
 </html>
