@@ -1,13 +1,13 @@
 # FullStack Translator Application
 
-This a Translator Application for Web and for PC.
+This a Translator Application for the Web and PC.
 
 # Features
 
-- Colourfull & Intercative GUI
+- Colorful & Interactive GUI
 - Cross Platform Application
 - Support Many Languages
-- Use of Google Api
+- Use of Google API
 
 # Tech Stack
 
