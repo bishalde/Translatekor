@@ -17,14 +17,14 @@ This a Translator Application for the Web and PC.
 
 ## Installation
 
-To start the virtual environment
+- To start the virtual environment
 
 ```bash
 /Scripts/activate
 
 ```
 
-To install all the Packages
+- To install all the Packages
 
 ```bash
 pip install -r requirements.txt
@@ -57,4 +57,4 @@ pip install -r requirements.txt
 
 # Support
 
-For support, email bishalde208@yahoo.com or join our call +91-8299260163.
+For support, email bishalde208@yahoo.com or join our call at +91-8299260163.
