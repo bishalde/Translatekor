@@ -11,9 +11,13 @@ This a Translator Application for the Web and PC.
 
 # Tech Stack
 
-**Client:** Bootstrap , Python[Tkinter]
+**Client:** 
+<ul>
+<li>Bootstrap</li>
+<li>Python[Tkinter]</li></ul>
 
-**Backend:** Flask
+**Backend:** 
+Flask
 
 ## Installation
 
