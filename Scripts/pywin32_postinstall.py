@@ -7,11 +7,11 @@ import sys
 import glob
 import shutil
 import sysconfig
+import win32api
+import win32con
+import winreg
 
-try:
-    import winreg as winreg
-except:
-    import winreg
+
 
 # Send output somewhere so it can be found if necessary...
 import tempfile
@@ -140,34 +140,46 @@ except NameError:
         raise ValueError("%s is an unknown path ID" % (path_name,))
 
 
-def CopyTo(desc, src, dest):
-    import win32api, win32con
+logging.basicConfig(filename='copy_to.log', level=logging.ERROR)
 
-    while 1:
+def CopyTo(desc, src, dest, max_retries=3):
+    if not os.path.exists(src):
+        raise FileNotFoundError(f"Source file not found: {src}")
+
+    retry_count = 0
+    while retry_count < max_retries:
         try:
             win32api.CopyFile(src, dest, 0)
             return
         except win32api.error as details:
             if details.winerror == 5:  # access denied - user not admin.
+                logging.error(f"Access denied: {details}")
                 raise
             if silent:
                 # Running silent mode - just re-raise the error.
+                logging.error(f"Silent mode error: {details}")
                 raise
             full_desc = (
-                "Error %s\n\n"
+                f"Error {desc}\n\n"
                 "If you have any Python applications running, "
-                "please close them now\nand select 'Retry'\n\n%s"
-                % (desc, details.strerror)
+                "please close them now\nand select 'Retry'\n\n"
+                f"{details.strerror}\n"
+                f"Source: {src}\nDestination: {dest}"
             )
-            rc = win32api.MessageBox(
-                0, full_desc, "Installation Error", win32con.MB_ABORTRETRYIGNORE
-            )
+            try:
+                rc = win32api.MessageBox(
+                    0, full_desc, "Installation Error", win32con.MB_ABORTRETRYIGNORE
+                )
+            except win32api.error as msgbox_error:
+                logging.error(f"MessageBox error: {msgbox_error}")
+                raise
+
             if rc == win32con.IDABORT:
                 raise
             elif rc == win32con.IDIGNORE:
                 return
             # else retry - around we go again.
-
+            retry_count += 1
 
 # We need to import win32api to determine the Windows system directory,
 # so we can copy our system files there - but importing win32api will
@@ -194,18 +206,25 @@ def LoadSystemModule(lib_dir, modname):
 
 
 def SetPyKeyVal(key_name, value_name, value):
-    root_hkey = get_root_hkey()
-    root_key = winreg.OpenKey(root_hkey, root_key_name)
     try:
-        my_key = winreg.CreateKey(root_key, key_name)
+        root_hkey = get_root_hkey()
+        root_key = winreg.OpenKey(root_hkey, root_key_name)
         try:
-            winreg.SetValueEx(my_key, value_name, 0, winreg.REG_SZ, value)
-            if verbose:
-                print("-> %s\\%s[%s]=%r" % (root_key_name, key_name, value_name, value))
+            my_key = winreg.CreateKey(root_key, key_name)
+            try:
+                winreg.SetValueEx(my_key, value_name, 0, winreg.REG_SZ, value)
+                if verbose:
+                    print("-> %s\\%s[%s]=%r" % (root_key_name, key_name, value_name, value))
+            except OSError as e:
+                print(f"Failed to set value {value_name}: {e}")
+            finally:
+                my_key.Close()
+        except OSError as e:
+            print(f"Failed to create key {key_name}: {e}")
         finally:
-            my_key.Close()
-    finally:
-        root_key.Close()
+            root_key.Close()
+    except OSError as e:
+        print(f"Failed to open root key: {e}")
 
 
 def UnsetPyKeyVal(key_name, value_name, delete_key=False):
