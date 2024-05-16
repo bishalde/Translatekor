@@ -7,6 +7,7 @@ import sys
 import glob
 import shutil
 import sysconfig
+import argparse
 
 try:
     import winreg as winreg
@@ -86,7 +87,8 @@ silent = 0
 verbose = 1
 
 root_key_name = "Software\\Python\\PythonCore\\" + sys.winver
-
+    def file_created(file):
+        pass
 try:
     # When this script is run from inside the bdist_wininst installer,
     # file_created() and directory_created() are additional builtin
@@ -98,8 +100,7 @@ try:
 except NameError:
     is_bdist_wininst = False  # we know what it is not - but not what it is :)
 
-    def file_created(file):
-        pass
+
 
     def directory_created(directory):
         pass
