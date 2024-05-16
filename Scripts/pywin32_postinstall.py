@@ -18,11 +18,6 @@ import tempfile
 
 tee_f = open(os.path.join(tempfile.gettempdir(), "pywin32_postinstall.log"), "w")
 
-
-import os
-import sys
-import tempfile
-
 # Initialize the log file with context manager to ensure it gets closed properly
 log_file_path = os.path.join(tempfile.gettempdir(), "pywin32_postinstall.log")
 with open(log_file_path, "w") as tee_f:
