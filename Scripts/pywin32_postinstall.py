@@ -7,6 +7,7 @@ import sys
 import glob
 import shutil
 import sysconfig
+import argparse
 
 try:
     import winreg as winreg
@@ -18,37 +19,58 @@ import tempfile
 
 tee_f = open(os.path.join(tempfile.gettempdir(), "pywin32_postinstall.log"), "w")
 
+# Initialize the log file with context manager to ensure it gets closed properly
+log_file_path = os.path.join(tempfile.gettempdir(), "pywin32_postinstall.log")
+with open(log_file_path, "w") as tee_f:
 
-class Tee:
-    def __init__(self, file):
-        self.f = file
+    class Tee:
+        def __init__(self, file, log_file):
+            self.f = file
+            self.log_file = log_file
 
-    def write(self, what):
-        if self.f is not None:
+        def write(self, what):
             try:
-                self.f.write(what.replace("\n", "\r\n"))
-            except IOError:
-                pass
-        tee_f.write(what)
+                if self.f is not None:
+                    self.f.write(what.replace("\n", "\r\n"))
+            except IOError as e:
+                print(f"Error writing to file: {e}", file=sys.stderr)
 
-    def flush(self):
-        if self.f is not None:
             try:
-                self.f.flush()
-            except IOError:
-                pass
+                self.log_file.write(what)
+            except IOError as e:
+                print(f"Error writing to log file: {e}", file=sys.stderr)
+
+        def flush(self):
+            try:
+                if self.f is not None:
+                    self.f.flush()
+            except IOError as e:
+                print(f"Error flushing file: {e}", file=sys.stderr)
+
+            try:
+                self.log_file.flush()
+            except IOError as e:
+                print(f"Error flushing log file: {e}", file=sys.stderr)
+
+    # For some unknown reason, when running under bdist_wininst we will start up
+    # with sys.stdout as None but stderr is hooked up. This work-around allows
+    # bdist_wininst to see the output we write and display it at the end of
+    # the install.
+    if sys.stdout is None:
+        sys.stdout = sys.stderr
+
+    sys.stderr = Tee(sys.stderr, tee_f)
+    sys.stdout = Tee(sys.stdout, tee_f)
+
+    # Ensure to flush and close log file properly
+    try:
+
+        print("Example log message")
+
+    finally:
         tee_f.flush()
+        tee_f.close()
 
-
-# For some unknown reason, when running under bdist_wininst we will start up
-# with sys.stdout as None but stderr is hooked up. This work-around allows
-# bdist_wininst to see the output we write and display it at the end of
-# the install.
-if sys.stdout is None:
-    sys.stdout = sys.stderr
-
-sys.stderr = Tee(sys.stderr)
-sys.stdout = Tee(sys.stdout)
 
 com_modules = [
     # module_name,                      class_names
@@ -65,7 +87,8 @@ silent = 0
 verbose = 1
 
 root_key_name = "Software\\Python\\PythonCore\\" + sys.winver
-
+    def file_created(file):
+        pass
 try:
     # When this script is run from inside the bdist_wininst installer,
     # file_created() and directory_created() are additional builtin
@@ -77,8 +100,7 @@ try:
 except NameError:
     is_bdist_wininst = False  # we know what it is not - but not what it is :)
 
-    def file_created(file):
-        pass
+
 
     def directory_created(directory):
         pass
